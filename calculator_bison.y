@@ -7,18 +7,19 @@
 
 %union{
     char * sval;
-    int int_type;
+    int intType;
 }
 
 /* declare tokens */
 %token <sval> STRING
-%token <int_type> NUMBER
+%token <intType> NUMBER
 
 %token ADD SUB MUL DIV ABS
 %token EOL
 %token OP CP
+%token SQ
 
-%type <int_type> exp factor term
+%type <intType> exp factor term
 
 %start calclist
 
@@ -35,13 +36,10 @@ factor: term
  | factor DIV term { $$ = $1 / $3; }
  ;
 term: NUMBER 
- | STRING {
-          int len = strlen($1)-1;
-          $1[len] = '\0';
-          $$ = atoi(&$1[1]);
- }
- | ABS term { $$ = $2 >= 0? $2 : - $2; }
+ | SUB NUMBER { $$ = -$2; }
+ | ABS exp ABS { $$ = $2 >= 0? $2 : - $2; }
  | OP exp CP { $$ = $2; }
+ | SQ exp SQ { $$ = $2; }
 ;
 %%
 int

@@ -58,7 +58,8 @@ extern int yydebug;
     ABS = 264,
     EOL = 265,
     OP = 266,
-    CP = 267
+    CP = 267,
+    SQ = 268
   };
 #endif
 
@@ -69,9 +70,9 @@ union YYSTYPE
 #line 8 "calculator_bison.y"
 
     char * sval;
-    int int_type;
+    int intType;
 
-#line 75 "calculator_bison.tab.h"
+#line 76 "calculator_bison.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

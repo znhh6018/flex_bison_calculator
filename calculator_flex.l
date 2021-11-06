@@ -10,9 +10,10 @@
 "|" {return ABS;}
 "(" {return OP;}
 ")" {return CP;}
-\'[0-9]+\' {yylval.sval = strdup(yytext); return STRING;} 
+"'" {return SQ;}/* single quotation */
+ /* \'[0-9]+\' {yylval.sval = strdup(yytext); return STRING;}  */
 "//".* /* ignore comments */
-[0-9]+ {yylval.int_type = atoi(yytext); return NUMBER;}
+[0-9]+ {yylval.intType = atoi(yytext); return NUMBER;}
 \n {return EOL;}
 [ \t] { /* ignore whitespace */ }
 . { printf("Mystery character %c\n", *yytext); }
